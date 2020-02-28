@@ -1,22 +1,27 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #include <string.h>
 #include <iostream>
 #include <conio.h>
 
 
 //for (i = 0; i < n; i++)
-//{													//¼ÓÉÏ»¨À¨ºÅÖ®ºóµÄprintfÖÐStrIÎÞ·¨Ê¶±ð
-char StrI[8] = { ' ', ' ', ' ', '|', ' ', ' ', ' ' };	//8ÓÃ£¨2*i£©+1Ê±ÏÔÊ¾¡°ÌÌÌÌÌÌÂÒÂë¡±
-static char StrN1[3][8] = { ' ' };
-static char StrN2[3][8] = { ' ' };
-static char StrN3[3][8] = { ' ' };
-char StrP3[8] = { ' ', ' ', '=', '=', '=', ' ', ' ' };
-char StrP5[8] = { ' ', '=', '=', '=', '=', '=', ' ' };
-char StrP7[8] = { '=', '=', '=', '=', '=', '=', '=' };
+//{														//åŠ ä¸ŠèŠ±æ‹¬å·ä¹‹åŽçš„printfä¸­StrIæ— æ³•è¯†åˆ«
+char StrI[8] = { ' ', ' ', ' ', '|', ' ', ' ', ' ' };	//8ç”¨ï¼ˆ2*iï¼‰+1æ—¶æ˜¾ç¤ºâ€œçƒ«çƒ«çƒ«ä¹±ç â€ï¼Œæ­¤æ•°ç»„ç›¸å½“äºŽç©ºå±‚
+static char StrN1[3][8] = { ' ' };						//1å±‚
+static char StrN2[3][8] = { ' ' };						//2å±‚
+static char StrN3[3][8] = { ' ' };						//3å±‚
+char StrP3[8] = { ' ', ' ', '=', '=', '=', ' ', ' ' };	//å°ç›˜
+char StrP5[8] = { ' ', '=', '=', '=', '=', '=', ' ' };	//ä¸­ç›˜
+char StrP7[8] = { '=', '=', '=', '=', '=', '=', '=' };	//å¤§ç›˜
 //}
 
 
-void Menu();				//Ç°ÏòÒýÓÃÉùÃ÷
+void Menu();		//ä¸»ç•Œé¢ï¼ŒåŒ…å«è¾“å…¥åˆ¤å®š
+void Show();		//æ­å»ºæ¸¸æˆç•Œé¢ï¼Œåªæ˜¾ç¤º
+void Help();		//å¸®åŠ©ç³»ç»Ÿ
+void Play();		//åˆå§‹åŒ–æ¸¸æˆï¼Œè¿›å…¥è¾“å…¥åˆ¤æ–­ç®—æ³•å‡½æ•°
+void Getin();		//ä¸»è¦è¾“å…¥åˆ¤å®šç®—æ³•å‡½æ•°
+
 int main()
 {
 	Menu();
@@ -24,11 +29,40 @@ int main()
 	return 0;
 }
 
+void Menu()
+{
+	int M_CH = 0;
+	printf("\n\n\n\n\t\t\t     Sakura æ±‰è¯ºå¡”V1.01");
+	printf("\n\n\n\n\n\t\t\t\t1. å¼€å§‹æ¸¸æˆ\n\n\n\t\t\t\t2. å¸®åŠ©\n\n\n\t\t\t\t3. é€€å‡ºæ¸¸æˆ\n\n");
+	M_CH = _getch();
+	if (M_CH == '1')
+	{
+		system("cls");
+		Play();
+	}
+	if (M_CH == '2')
+	{
+		system("cls");
+		Help();
+	}
+	if (M_CH == '3')
+	{
+		exit(0);
+	}
+	else
+	{
+		printf("\n\n\t\t\t    è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥!\n");
+		int DELAY = 280000000;
+		int i = 0;
+		for (i = 0; i < DELAY; i++){}
+		system("cls");
+		Menu();
+	}
+}
 
-void Play();
 void Show()
 {
-	printf("\n\tR:  ÖØÐÂ¿ªÊ¼\tB:  ·µ»ØÖ÷²Ëµ¥\tQ:  ÍË³öÓÎÏ·\n");
+	printf("\n\tR:  é‡æ–°å¼€å§‹\tB:  è¿”å›žä¸»èœå•\tQ:  é€€å‡ºæ¸¸æˆ\n");
 	printf("\n-------------------------------------------------------------------\n");
 	printf("\n| |                                                             | |");
 	printf("\n| |                                                             | |");
@@ -47,31 +81,64 @@ void Show()
 	printf("\n-------------------------------------------------------------------\n\n");
 }
 
+void Help()
+{
+	printf("\n\n\n\n\t\t\t\tæŠ±æ­‰ï¼Œå¸®åŠ©è¯·è‡ªè¡Œè„‘è¡¥ã€‚(æŒ‰ä»»æ„é”®è¿”å›žä¸»èœå•)");
+	if (_getch())
+	{
+		system("cls");
+		Menu();
+	}
+}
+
+void Play()
+{
+	int n = 3;
+	int i = 0;
+	//printf("è¯·è¾“å…¥å±‚æ•°:");
+	//scanf_s("%d", &n);
+
+	strcpy_s(StrN1[0], StrP3);			//åˆå§‹åŒ–
+	strcpy_s(StrN1[1], StrI);
+	strcpy_s(StrN1[2], StrI);
+	strcpy_s(StrN2[0], StrP5);
+	strcpy_s(StrN2[1], StrI);
+	strcpy_s(StrN2[2], StrI);
+	strcpy_s(StrN3[0], StrP7);
+	strcpy_s(StrN3[1], StrI);
+	strcpy_s(StrN3[2], StrI);
+	Show();
+
+	while (1)
+	{
+		Getin();
+	}
+}
 
 void Getin()
 {
 	char CH = '\0';
-	printf("\n\t\t\t\tÊäÈë");
-	CH = _getch();							//_getch()ÊµÏÖ¼üÅÌ¼à²â
+	printf("\n\t\t\t\tè¾“å…¥");
+	CH = _getch();							//_getch()å®žçŽ°é”®ç›˜ç›‘æµ‹
 	//-----------------------------------------------------------------------------------------------------------
-	if (CH == '1' && strcmp(StrN1[0], StrI) != 0 && strcmp(StrN1[0], StrP3) == 0)					//Èç¹û¼üÈë1ÇÒ1Öù¶¥²ã²»Îª¿ÕÇÒÎªÈý
+	if (CH == '1' && strcmp(StrN1[0], StrI) != 0 && strcmp(StrN1[0], StrP3) == 0)					//å¦‚æžœé”®å…¥1ä¸”1æŸ±é¡¶å±‚ä¸ä¸ºç©ºä¸”ä¸ºä¸‰
 	{
 		printf("1");
 		CH = _getch();
-		if (CH == '2')																				//ÒòÎª1Öù¶¥²»Îª¿Õ£¬ËùÒÔ1ÖùËùÒÆ¶¯µÄÆ¬È«²¿·ÅÔÚ2Öùµ×²¿
+		if (CH == '2')																				//å› ä¸º1æŸ±é¡¶ä¸ä¸ºç©ºï¼Œæ‰€ä»¥1æŸ±æ‰€ç§»åŠ¨çš„ç‰‡å…¨éƒ¨æ”¾åœ¨2æŸ±åº•éƒ¨
 		{
 			printf("2");
-			strcpy_s(StrN1[0], StrI);									//1Öù¶¥²ãÖÆ¿Õ
-			strcpy_s(StrN3[1], StrP3);									//2Öùµ×²ã¼ÓÈý
-			system("cls");					//´Ë´¦Ê¹ÓÃiostream
+			strcpy_s(StrN1[0], StrI);									//1æŸ±é¡¶å±‚åˆ¶ç©º
+			strcpy_s(StrN3[1], StrP3);									//2æŸ±åº•å±‚åŠ ä¸‰
+			system("cls");					//æ­¤å¤„ä½¿ç”¨iostream
 			Show();
-			Getin();						//µÝ¹éµ÷ÓÃ
+			Getin();						//é€’å½’è°ƒç”¨
 		}
-		if (CH == '3')																				//ÒòÎª1Öù¶¥²»Îª¿Õ£¬ËùÒÔ1ÖùËùÒÆ¶¯µÄÆ¬Ö±½Ó·ÅÔÚ2Öùµ×²¿
+		if (CH == '3')																				//å› ä¸º1æŸ±é¡¶ä¸ä¸ºç©ºï¼Œæ‰€ä»¥1æŸ±æ‰€ç§»åŠ¨çš„ç‰‡ç›´æŽ¥æ”¾åœ¨2æŸ±åº•éƒ¨
 		{
 			printf("3");
-			strcpy_s(StrN1[0], StrI);									//1Öù¶¥²ãÖÆ¿Õ
-			strcpy_s(StrN3[2], StrP3);									//3Öùµ×²ã¼ÓÈý
+			strcpy_s(StrN1[0], StrI);									//1æŸ±é¡¶å±‚åˆ¶ç©º
+			strcpy_s(StrN3[2], StrP3);									//3æŸ±åº•å±‚åŠ ä¸‰
 			system("cls");
 			Show(); 
 			Getin();
@@ -80,19 +147,19 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
-	if (CH == '1' && strcmp(StrN1[0], StrI) != 0 && strcmp(StrN1[0], StrP5) == 0)			//Èç¹û¼üÈë1ÇÒ1Öù¶¥²ã²»Îª¿ÕÇÒÎªÎå
+	if (CH == '1' && strcmp(StrN1[0], StrI) != 0 && strcmp(StrN1[0], StrP5) == 0)			//å¦‚æžœé”®å…¥1ä¸”1æŸ±é¡¶å±‚ä¸ä¸ºç©ºä¸”ä¸ºäº”
 	{
 		printf("1");
 		CH = _getch();
 		if (CH == '2')
 		{
 			printf("2");
-			strcpy_s(StrN2[0], StrI);									//1Öù¶¥²ãÖÆ¿Õ
-			strcpy_s(StrN3[1], StrP5);									//2Öùµ×²ã¼ÓÎå
+			strcpy_s(StrN2[0], StrI);									//1æŸ±é¡¶å±‚åˆ¶ç©º
+			strcpy_s(StrN3[1], StrP5);									//2æŸ±åº•å±‚åŠ äº”
 			system("cls");
 			Show();
 			Getin();
@@ -110,7 +177,7 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
@@ -140,12 +207,12 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
 	//-----------------------------------------------------------------------------------------------------------
-	if (CH == '2' && strcmp(StrN1[1], StrI) != 0 && strcmp(StrN1[1], StrP3) == 0)
+	if (CH == '2' && strcmp(StrN1[1], StrI) != 0 && strcmp(StrN1[1], StrP3) == 0)					//å¦‚æžœé”®å…¥2ä¸”2æŸ±é¡¶å±‚ä¸ä¸ºç©ºä¸”ä¸ºä¸‰
 	{
 		printf("2");
 		CH = _getch();
@@ -171,7 +238,7 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
@@ -201,7 +268,7 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
@@ -231,12 +298,12 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
 	//-----------------------------------------------------------------------------------------------------------
-	if (CH == '3' && strcmp(StrN1[2], StrI) != 0 && strcmp(StrN1[2], StrP3) == 0)
+	if (CH == '3' && strcmp(StrN1[2], StrI) != 0 && strcmp(StrN1[2], StrP3) == 0)					//å¦‚æžœé”®å…¥3ä¸”3æŸ±é¡¶å±‚ä¸ä¸ºç©ºä¸”ä¸ºä¸‰
 	{
 		printf("3");
 		CH = _getch();
@@ -262,7 +329,7 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
@@ -292,7 +359,7 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
@@ -322,47 +389,47 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
 	//-----------------------------------------------------------------------------------------------------------
 	//-----------------------------------------------------------------------------------------------------------
-	if (CH == '1' && strcmp(StrN1[0], StrI) == 0 && strcmp(StrN2[0], StrI) != 0 && strcmp(StrN2[0], StrP3) == 0)		//1Öù¶¥²ãÎª¿Õ£¬ÖÐ¼ä²ãÎªÈý
+	if (CH == '1' && strcmp(StrN1[0], StrI) == 0 && strcmp(StrN2[0], StrI) != 0 && strcmp(StrN2[0], StrP3) == 0)		//1æŸ±é¡¶å±‚ä¸ºç©ºï¼Œä¸­é—´å±‚ä¸ºä¸‰
 	{
 		printf("1");
 		CH = _getch();
-		if (CH == '2' && strcmp(StrN3[1], StrI) == 0)																	//Èô²»ÔÚ1ÖùµÄÒ»Æ¬²»ÔÚ2Öù
+		if (CH == '2' && strcmp(StrN3[1], StrI) == 0)																	//è‹¥ä¸åœ¨1æŸ±çš„ä¸€ç‰‡ä¸åœ¨2æŸ±
 		{
 			printf("2");
-			strcpy_s(StrN2[0], StrI);											//½«1ÖùÖÐ¼ä²ãÒÆµ½2Öùµ×²ã
+			strcpy_s(StrN2[0], StrI);											//å°†1æŸ±ä¸­é—´å±‚ç§»åˆ°2æŸ±åº•å±‚
 			strcpy_s(StrN3[1], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '2' && strcmp(StrN3[1], StrI) != 0)																	//Èô²»ÔÚ1ÖùµÄÒ»Æ¬ÔÚ2Öù
+		if (CH == '2' && strcmp(StrN3[1], StrI) != 0)																	//è‹¥ä¸åœ¨1æŸ±çš„ä¸€ç‰‡åœ¨2æŸ±
 		{
 			printf("2");
-			strcpy_s(StrN2[0], StrI);											//½«1ÖùÖÐ¼ä²ãÒÆµ½2ÖùÖÐ²ã
+			strcpy_s(StrN2[0], StrI);											//å°†1æŸ±ä¸­é—´å±‚ç§»åˆ°2æŸ±ä¸­å±‚
 			strcpy_s(StrN2[1], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) == 0)																	//Èô²»ÔÚ1ÖùµÄÒ»Æ¬²»ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) == 0)																	//è‹¥ä¸åœ¨1æŸ±çš„ä¸€ç‰‡ä¸åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN2[0], StrI);											//½«1ÖùÖÐ¼ä²ãÒÆµ½3Öùµ×²ã
+			strcpy_s(StrN2[0], StrI);											//å°†1æŸ±ä¸­é—´å±‚ç§»åˆ°3æŸ±åº•å±‚
 			strcpy_s(StrN3[2], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) != 0)																	//Èô²»ÔÚ1ÖùµÄÒ»Æ¬ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) != 0)																	//è‹¥ä¸åœ¨1æŸ±çš„ä¸€ç‰‡åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN2[0], StrI);											//½«1ÖùÖÐ¼ä²ãÒÆµ½3ÖùÖÐ²ã
+			strcpy_s(StrN2[0], StrI);											//å°†1æŸ±ä¸­é—´å±‚ç§»åˆ°3æŸ±ä¸­å±‚
 			strcpy_s(StrN2[2], StrP3);
 			system("cls");
 			Show();
@@ -372,7 +439,7 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
@@ -420,7 +487,7 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
@@ -468,46 +535,46 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
 	//-----------------------------------------------------------------------------------------------------------
-	if (CH == '2' && strcmp(StrN1[1], StrI) == 0 && strcmp(StrN2[1], StrI) != 0 && strcmp(StrN2[1], StrP3) == 0)		//2Öù¶¥²ãÎª¿Õ£¬ÖÐ¼ä²ãÎªÈý
+	if (CH == '2' && strcmp(StrN1[1], StrI) == 0 && strcmp(StrN2[1], StrI) != 0 && strcmp(StrN2[1], StrP3) == 0)		//2æŸ±é¡¶å±‚ä¸ºç©ºï¼Œä¸­é—´å±‚ä¸ºä¸‰
 	{
 		printf("2");
 		CH = _getch();
-		if (CH == '1' && strcmp(StrN3[0], StrI) == 0)																	//Èô²»ÔÚ2ÖùµÄÒ»Æ¬²»ÔÚ1Öù
+		if (CH == '1' && strcmp(StrN3[0], StrI) == 0)																	//è‹¥ä¸åœ¨2æŸ±çš„ä¸€ç‰‡ä¸åœ¨1æŸ±
 		{
 			printf("1");
-			strcpy_s(StrN2[1], StrI);											//½«2ÖùÖÐ¼ä²ãÒÆµ½1Öùµ×²ã
+			strcpy_s(StrN2[1], StrI);											//å°†2æŸ±ä¸­é—´å±‚ç§»åˆ°1æŸ±åº•å±‚
 			strcpy_s(StrN3[0], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '1' && strcmp(StrN3[0], StrI) != 0)																	//Èô²»ÔÚ2ÖùµÄÒ»Æ¬ÔÚ1Öù
+		if (CH == '1' && strcmp(StrN3[0], StrI) != 0)																	//è‹¥ä¸åœ¨2æŸ±çš„ä¸€ç‰‡åœ¨1æŸ±
 		{
 			printf("1");
-			strcpy_s(StrN2[1], StrI);											//½«2ÖùÖÐ¼ä²ãÒÆµ½1ÖùÖÐ²ã
+			strcpy_s(StrN2[1], StrI);											//å°†2æŸ±ä¸­é—´å±‚ç§»åˆ°1æŸ±ä¸­å±‚
 			strcpy_s(StrN2[0], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) == 0)																	//Èô²»ÔÚ2ÖùµÄÒ»Æ¬²»ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) == 0)																	//è‹¥ä¸åœ¨2æŸ±çš„ä¸€ç‰‡ä¸åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN2[1], StrI);											//½«2ÖùÖÐ¼ä²ãÒÆµ½3Öùµ×²ã
+			strcpy_s(StrN2[1], StrI);											//å°†2æŸ±ä¸­é—´å±‚ç§»åˆ°3æŸ±åº•å±‚
 			strcpy_s(StrN3[2], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) != 0)																	//Èô²»ÔÚ2ÖùµÄÒ»Æ¬ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) != 0)																	//è‹¥ä¸åœ¨2æŸ±çš„ä¸€ç‰‡åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN2[1], StrI);											//½«2ÖùÖÐ¼ä²ãÒÆµ½3ÖùÖÐ²ã
+			strcpy_s(StrN2[1], StrI);											//å°†2æŸ±ä¸­é—´å±‚ç§»åˆ°3æŸ±ä¸­å±‚
 			strcpy_s(StrN2[2], StrP3);
 			system("cls");
 			Show();
@@ -517,7 +584,7 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
@@ -565,7 +632,7 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
@@ -613,46 +680,46 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
 	//-----------------------------------------------------------------------------------------------------------
-	if (CH == '3' && strcmp(StrN1[2], StrI) == 0 && strcmp(StrN2[2], StrI) != 0 && strcmp(StrN2[2], StrP3) == 0)		//3Öù¶¥²ãÎª¿Õ£¬ÖÐ¼ä²ãÎªÈý
+	if (CH == '3' && strcmp(StrN1[2], StrI) == 0 && strcmp(StrN2[2], StrI) != 0 && strcmp(StrN2[2], StrP3) == 0)		//3æŸ±é¡¶å±‚ä¸ºç©ºï¼Œä¸­é—´å±‚ä¸ºä¸‰
 	{
 		printf("3");
 		CH = _getch();
-		if (CH == '1' && strcmp(StrN3[0], StrI) == 0)																	//Èô²»ÔÚ3ÖùµÄÒ»Æ¬²»ÔÚ1Öù
+		if (CH == '1' && strcmp(StrN3[0], StrI) == 0)																	//è‹¥ä¸åœ¨3æŸ±çš„ä¸€ç‰‡ä¸åœ¨1æŸ±
 		{
 			printf("1");
-			strcpy_s(StrN2[2], StrI);											//½«3ÖùÖÐ¼ä²ãÒÆµ½1Öùµ×²ã
+			strcpy_s(StrN2[2], StrI);											//å°†3æŸ±ä¸­é—´å±‚ç§»åˆ°1æŸ±åº•å±‚
 			strcpy_s(StrN3[0], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '1' && strcmp(StrN3[0], StrI) != 0)																	//Èô²»ÔÚ3ÖùµÄÒ»Æ¬ÔÚ1Öù
+		if (CH == '1' && strcmp(StrN3[0], StrI) != 0)																	//è‹¥ä¸åœ¨3æŸ±çš„ä¸€ç‰‡åœ¨1æŸ±
 		{
 			printf("1");
-			strcpy_s(StrN2[2], StrI);											//½«3ÖùÖÐ¼ä²ãÒÆµ½1ÖùÖÐ²ã
+			strcpy_s(StrN2[2], StrI);											//å°†3æŸ±ä¸­é—´å±‚ç§»åˆ°1æŸ±ä¸­å±‚
 			strcpy_s(StrN2[0], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '2' && strcmp(StrN3[1], StrI) == 0)																	//Èô²»ÔÚ3ÖùµÄÒ»Æ¬²»ÔÚ2Öù
+		if (CH == '2' && strcmp(StrN3[1], StrI) == 0)																	//è‹¥ä¸åœ¨3æŸ±çš„ä¸€ç‰‡ä¸åœ¨2æŸ±
 		{
 			printf("2");
-			strcpy_s(StrN2[2], StrI);											//½«3ÖùÖÐ¼ä²ãÒÆµ½2Öùµ×²ã
+			strcpy_s(StrN2[2], StrI);											//å°†3æŸ±ä¸­é—´å±‚ç§»åˆ°2æŸ±åº•å±‚
 			strcpy_s(StrN3[1], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '2' && strcmp(StrN3[1], StrI) != 0)																	//Èô²»ÔÚ3ÖùµÄÒ»Æ¬ÔÚ2Öù
+		if (CH == '2' && strcmp(StrN3[1], StrI) != 0)																	//è‹¥ä¸åœ¨3æŸ±çš„ä¸€ç‰‡åœ¨2æŸ±
 		{
 			printf("2");
-			strcpy_s(StrN2[2], StrI);											//½«3ÖùÖÐ¼ä²ãÒÆµ½2ÖùÖÐ²ã
+			strcpy_s(StrN2[2], StrI);											//å°†3æŸ±ä¸­é—´å±‚ç§»åˆ°2æŸ±ä¸­å±‚
 			strcpy_s(StrN2[1], StrP3);
 			system("cls");
 			Show();
@@ -662,7 +729,7 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
@@ -710,7 +777,7 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
@@ -758,65 +825,65 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
 	//-----------------------------------------------------------------------------------------------------------
 	//-----------------------------------------------------------------------------------------------------------
-	if (CH == '1' && strcmp(StrN2[0], StrI) == 0 && strcmp(StrN3[0], StrI) != 0 && strcmp(StrN3[0], StrP3) == 0)		//1ÖùÖÐ²ãÎª¿Õ£¬µ×²ãÎªÈý
+	if (CH == '1' && strcmp(StrN2[0], StrI) == 0 && strcmp(StrN3[0], StrI) != 0 && strcmp(StrN3[0], StrP3) == 0)		//1æŸ±ä¸­å±‚ä¸ºç©ºï¼Œåº•å±‚ä¸ºä¸‰
 	{
 		printf("1");
 		CH = _getch();
-		if (CH == '2' && strcmp(StrN3[1], StrI) == 0)																	//Èô²»ÔÚ1ÖùµÄÁ½Æ¬¶¼²»ÔÚ2Öù
+		if (CH == '2' && strcmp(StrN3[1], StrI) == 0)																	//è‹¥ä¸åœ¨1æŸ±çš„ä¸¤ç‰‡éƒ½ä¸åœ¨2æŸ±
 		{
 			printf("2");
-			strcpy_s(StrN3[0], StrI);											//½«1Öùµ×²ãÒÆµ½2Öùµ×²ã
+			strcpy_s(StrN3[0], StrI);											//å°†1æŸ±åº•å±‚ç§»åˆ°2æŸ±åº•å±‚
 			strcpy_s(StrN3[1], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '2' && strcmp(StrN3[1], StrI) != 0 && strcmp(StrN2[1], StrI) == 0)									//Èô²»ÔÚ1ÖùµÄÖ»ÓÐÒ»Æ¬ÔÚ2Öù
+		if (CH == '2' && strcmp(StrN3[1], StrI) != 0 && strcmp(StrN2[1], StrI) == 0)									//è‹¥ä¸åœ¨1æŸ±çš„åªæœ‰ä¸€ç‰‡åœ¨2æŸ±
 		{
 			printf("2");
-			strcpy_s(StrN3[0], StrI);											//½«1Öùµ×²ãÒÆµ½2ÖùÖÐ²ã
+			strcpy_s(StrN3[0], StrI);											//å°†1æŸ±åº•å±‚ç§»åˆ°2æŸ±ä¸­å±‚
 			strcpy_s(StrN2[1], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '2' && strcmp(StrN3[1], StrI) != 0 && strcmp(StrN2[1], StrI) != 0)									//Èô²»ÔÚ1ÖùµÄÁ½Æ¬È«ÔÚ2Öù
+		if (CH == '2' && strcmp(StrN3[1], StrI) != 0 && strcmp(StrN2[1], StrI) != 0)									//è‹¥ä¸åœ¨1æŸ±çš„ä¸¤ç‰‡å…¨åœ¨2æŸ±
 		{
 			printf("2");
-			strcpy_s(StrN3[0], StrI);											//½«1Öùµ×²ãÒÆµ½2Öù¶¥²ã
+			strcpy_s(StrN3[0], StrI);											//å°†1æŸ±åº•å±‚ç§»åˆ°2æŸ±é¡¶å±‚
 			strcpy_s(StrN1[1], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) == 0)																	//Èô²»ÔÚ1ÖùµÄÁ½Æ¬¶¼²»ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) == 0)																	//è‹¥ä¸åœ¨1æŸ±çš„ä¸¤ç‰‡éƒ½ä¸åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN3[0], StrI);											//½«1Öùµ×²ãÒÆµ½3Öùµ×²ã
+			strcpy_s(StrN3[0], StrI);											//å°†1æŸ±åº•å±‚ç§»åˆ°3æŸ±åº•å±‚
 			strcpy_s(StrN3[2], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) == 0)									//Èô²»ÔÚ1ÖùµÄÖ»ÓÐÒ»Æ¬ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) == 0)									//è‹¥ä¸åœ¨1æŸ±çš„åªæœ‰ä¸€ç‰‡åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN3[0], StrI);											//½«1Öùµ×²ãÒÆµ½3ÖùÖÐ²ã
+			strcpy_s(StrN3[0], StrI);											//å°†1æŸ±åº•å±‚ç§»åˆ°3æŸ±ä¸­å±‚
 			strcpy_s(StrN2[2], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) != 0)									//Èô²»ÔÚ1ÖùµÄÁ½Æ¬È«ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) != 0)									//è‹¥ä¸åœ¨1æŸ±çš„ä¸¤ç‰‡å…¨åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN3[0], StrI);											//½«1Öùµ×²ãÒÆµ½3Öù¶¥²ã
+			strcpy_s(StrN3[0], StrI);											//å°†1æŸ±åº•å±‚ç§»åˆ°3æŸ±é¡¶å±‚
 			strcpy_s(StrN1[2], StrP3);
 			system("cls");
 			Show();
@@ -826,63 +893,63 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
-	if (CH == '1' && strcmp(StrN2[0], StrI) == 0 && strcmp(StrN3[0], StrI) != 0 && strcmp(StrN3[0], StrP5) == 0)		//1ÖùÖÐ²ãÎª¿Õ£¬µ×²ãÎªÎå
+	if (CH == '1' && strcmp(StrN2[0], StrI) == 0 && strcmp(StrN3[0], StrI) != 0 && strcmp(StrN3[0], StrP5) == 0)		//1æŸ±ä¸­å±‚ä¸ºç©ºï¼Œåº•å±‚ä¸ºäº”
 	{
 		printf("1");
 		CH = _getch();
-		if (CH == '2' && strcmp(StrN3[1], StrI) == 0)																	//Èô²»ÔÚ1ÖùµÄÁ½Æ¬¶¼²»ÔÚ2Öù
+		if (CH == '2' && strcmp(StrN3[1], StrI) == 0)																	//è‹¥ä¸åœ¨1æŸ±çš„ä¸¤ç‰‡éƒ½ä¸åœ¨2æŸ±
 		{
 			printf("2");
-			strcpy_s(StrN3[0], StrI);											//½«1Öùµ×²ãÒÆµ½2Öùµ×²ã
+			strcpy_s(StrN3[0], StrI);											//å°†1æŸ±åº•å±‚ç§»åˆ°2æŸ±åº•å±‚
 			strcpy_s(StrN3[1], StrP5);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '2' && strcmp(StrN3[1], StrI) != 0 && strcmp(StrN2[1], StrI) == 0)									//Èô²»ÔÚ1ÖùµÄÖ»ÓÐÒ»Æ¬ÔÚ2Öù
+		if (CH == '2' && strcmp(StrN3[1], StrI) != 0 && strcmp(StrN2[1], StrI) == 0)									//è‹¥ä¸åœ¨1æŸ±çš„åªæœ‰ä¸€ç‰‡åœ¨2æŸ±
 		{
 			printf("2");
-			strcpy_s(StrN3[0], StrI);											//½«1Öùµ×²ãÒÆµ½2ÖùÖÐ²ã
+			strcpy_s(StrN3[0], StrI);											//å°†1æŸ±åº•å±‚ç§»åˆ°2æŸ±ä¸­å±‚
 			strcpy_s(StrN2[1], StrP5);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '2' && strcmp(StrN3[1], StrI) != 0 && strcmp(StrN2[1], StrI) != 0)									//Èô²»ÔÚ1ÖùµÄÁ½Æ¬È«ÔÚ2Öù
+		if (CH == '2' && strcmp(StrN3[1], StrI) != 0 && strcmp(StrN2[1], StrI) != 0)									//è‹¥ä¸åœ¨1æŸ±çš„ä¸¤ç‰‡å…¨åœ¨2æŸ±
 		{
 			printf("2");
-			strcpy_s(StrN3[0], StrI);											//½«1Öùµ×²ãÒÆµ½2Öù¶¥²ã
+			strcpy_s(StrN3[0], StrI);											//å°†1æŸ±åº•å±‚ç§»åˆ°2æŸ±é¡¶å±‚
 			strcpy_s(StrN1[1], StrP5);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) == 0)																	//Èô²»ÔÚ1ÖùµÄÁ½Æ¬¶¼²»ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) == 0)																	//è‹¥ä¸åœ¨1æŸ±çš„ä¸¤ç‰‡éƒ½ä¸åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN3[0], StrI);											//½«1Öùµ×²ãÒÆµ½3Öùµ×²ã
+			strcpy_s(StrN3[0], StrI);											//å°†1æŸ±åº•å±‚ç§»åˆ°3æŸ±åº•å±‚
 			strcpy_s(StrN3[2], StrP5);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) == 0)									//Èô²»ÔÚ1ÖùµÄÖ»ÓÐÒ»Æ¬ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) == 0)									//è‹¥ä¸åœ¨1æŸ±çš„åªæœ‰ä¸€ç‰‡åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN3[0], StrI);											//½«1Öùµ×²ãÒÆµ½3ÖùÖÐ²ã
+			strcpy_s(StrN3[0], StrI);											//å°†1æŸ±åº•å±‚ç§»åˆ°3æŸ±ä¸­å±‚
 			strcpy_s(StrN2[2], StrP5);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) != 0)									//Èô²»ÔÚ1ÖùµÄÁ½Æ¬È«ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) != 0)									//è‹¥ä¸åœ¨1æŸ±çš„ä¸¤ç‰‡å…¨åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN3[0], StrI);											//½«1Öùµ×²ãÒÆµ½3Öù¶¥²ã
+			strcpy_s(StrN3[0], StrI);											//å°†1æŸ±åº•å±‚ç§»åˆ°3æŸ±é¡¶å±‚
 			strcpy_s(StrN1[2], StrP5);
 			system("cls");
 			Show();
@@ -892,63 +959,63 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
-	if (CH == '1' && strcmp(StrN2[0], StrI) == 0 && strcmp(StrN3[0], StrI) != 0 && strcmp(StrN3[0], StrP7) == 0)		//1ÖùÖÐ²ãÎª¿Õ£¬µ×²ãÎªÆß
+	if (CH == '1' && strcmp(StrN2[0], StrI) == 0 && strcmp(StrN3[0], StrI) != 0 && strcmp(StrN3[0], StrP7) == 0)		//1æŸ±ä¸­å±‚ä¸ºç©ºï¼Œåº•å±‚ä¸ºä¸ƒ
 	{
 		printf("1");
 		CH = _getch();
-		if (CH == '2' && strcmp(StrN3[1], StrI) == 0)																	//Èô²»ÔÚ1ÖùµÄÁ½Æ¬¶¼²»ÔÚ2Öù
+		if (CH == '2' && strcmp(StrN3[1], StrI) == 0)																	//è‹¥ä¸åœ¨1æŸ±çš„ä¸¤ç‰‡éƒ½ä¸åœ¨2æŸ±
 		{
 			printf("2");
-			strcpy_s(StrN3[0], StrI);											//½«1Öùµ×²ãÒÆµ½2Öùµ×²ã
+			strcpy_s(StrN3[0], StrI);											//å°†1æŸ±åº•å±‚ç§»åˆ°2æŸ±åº•å±‚
 			strcpy_s(StrN3[1], StrP7);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '2' && strcmp(StrN3[1], StrI) != 0 && strcmp(StrN2[1], StrI) == 0)									//Èô²»ÔÚ1ÖùµÄÖ»ÓÐÒ»Æ¬ÔÚ2Öù
+		if (CH == '2' && strcmp(StrN3[1], StrI) != 0 && strcmp(StrN2[1], StrI) == 0)									//è‹¥ä¸åœ¨1æŸ±çš„åªæœ‰ä¸€ç‰‡åœ¨2æŸ±
 		{
 			printf("2");
-			strcpy_s(StrN3[0], StrI);											//½«1Öùµ×²ãÒÆµ½2ÖùÖÐ²ã
+			strcpy_s(StrN3[0], StrI);											//å°†1æŸ±åº•å±‚ç§»åˆ°2æŸ±ä¸­å±‚
 			strcpy_s(StrN2[1], StrP7);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '2' && strcmp(StrN3[1], StrI) != 0 && strcmp(StrN2[1], StrI) != 0)									//Èô²»ÔÚ1ÖùµÄÁ½Æ¬È«ÔÚ2Öù
+		if (CH == '2' && strcmp(StrN3[1], StrI) != 0 && strcmp(StrN2[1], StrI) != 0)									//è‹¥ä¸åœ¨1æŸ±çš„ä¸¤ç‰‡å…¨åœ¨2æŸ±
 		{
 			printf("2");
-			strcpy_s(StrN3[0], StrI);											//½«1Öùµ×²ãÒÆµ½2Öù¶¥²ã
+			strcpy_s(StrN3[0], StrI);											//å°†1æŸ±åº•å±‚ç§»åˆ°2æŸ±é¡¶å±‚
 			strcpy_s(StrN1[1], StrP7);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) == 0)																	//Èô²»ÔÚ1ÖùµÄÁ½Æ¬¶¼²»ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) == 0)																	//è‹¥ä¸åœ¨1æŸ±çš„ä¸¤ç‰‡éƒ½ä¸åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN3[0], StrI);											//½«1Öùµ×²ãÒÆµ½3Öùµ×²ã
+			strcpy_s(StrN3[0], StrI);											//å°†1æŸ±åº•å±‚ç§»åˆ°3æŸ±åº•å±‚
 			strcpy_s(StrN3[2], StrP7);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) == 0)									//Èô²»ÔÚ1ÖùµÄÖ»ÓÐÒ»Æ¬ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) == 0)									//è‹¥ä¸åœ¨1æŸ±çš„åªæœ‰ä¸€ç‰‡åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN3[0], StrI);											//½«1Öùµ×²ãÒÆµ½3ÖùÖÐ²ã
+			strcpy_s(StrN3[0], StrI);											//å°†1æŸ±åº•å±‚ç§»åˆ°3æŸ±ä¸­å±‚
 			strcpy_s(StrN2[2], StrP7);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) != 0)									//Èô²»ÔÚ1ÖùµÄÁ½Æ¬È«ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) != 0)									//è‹¥ä¸åœ¨1æŸ±çš„ä¸¤ç‰‡å…¨åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN3[0], StrI);											//½«1Öùµ×²ãÒÆµ½3Öù¶¥²ã
+			strcpy_s(StrN3[0], StrI);											//å°†1æŸ±åº•å±‚ç§»åˆ°3æŸ±é¡¶å±‚
 			strcpy_s(StrN1[2], StrP7);
 			system("cls");
 			Show();
@@ -958,64 +1025,64 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
 	//-----------------------------------------------------------------------------------------------------------
-	if (CH == '2' && strcmp(StrN2[1], StrI) == 0 && strcmp(StrN3[1], StrI) != 0 && strcmp(StrN3[1], StrP3) == 0)		//2ÖùÖÐ²ãÎª¿Õ£¬µ×²ãÎªÈý
+	if (CH == '2' && strcmp(StrN2[1], StrI) == 0 && strcmp(StrN3[1], StrI) != 0 && strcmp(StrN3[1], StrP3) == 0)		//2æŸ±ä¸­å±‚ä¸ºç©ºï¼Œåº•å±‚ä¸ºä¸‰
 	{
 		printf("2");
 		CH = _getch();
-		if (CH == '1' && strcmp(StrN3[0], StrI) == 0)																	//Èô²»ÔÚ2ÖùµÄÁ½Æ¬¶¼²»ÔÚ1Öù
+		if (CH == '1' && strcmp(StrN3[0], StrI) == 0)																	//è‹¥ä¸åœ¨2æŸ±çš„ä¸¤ç‰‡éƒ½ä¸åœ¨1æŸ±
 		{
 			printf("1");
-			strcpy_s(StrN3[1], StrI);											//½«2Öùµ×²ãÒÆµ½1Öùµ×²ã
+			strcpy_s(StrN3[1], StrI);											//å°†2æŸ±åº•å±‚ç§»åˆ°1æŸ±åº•å±‚
 			strcpy_s(StrN3[0], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '1' && strcmp(StrN3[0], StrI) != 0 && strcmp(StrN2[0], StrI) == 0)									//Èô²»ÔÚ1ÖùµÄÖ»ÓÐÒ»Æ¬ÔÚ1Öù
+		if (CH == '1' && strcmp(StrN3[0], StrI) != 0 && strcmp(StrN2[0], StrI) == 0)									//è‹¥ä¸åœ¨1æŸ±çš„åªæœ‰ä¸€ç‰‡åœ¨1æŸ±
 		{
 			printf("1");
-			strcpy_s(StrN3[1], StrI);											//½«2Öùµ×²ãÒÆµ½1ÖùÖÐ²ã
+			strcpy_s(StrN3[1], StrI);											//å°†2æŸ±åº•å±‚ç§»åˆ°1æŸ±ä¸­å±‚
 			strcpy_s(StrN2[0], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '1' && strcmp(StrN3[0], StrI) != 0 && strcmp(StrN2[0], StrI) != 0)									//Èô²»ÔÚ1ÖùµÄÁ½Æ¬È«ÔÚ1Öù
+		if (CH == '1' && strcmp(StrN3[0], StrI) != 0 && strcmp(StrN2[0], StrI) != 0)									//è‹¥ä¸åœ¨1æŸ±çš„ä¸¤ç‰‡å…¨åœ¨1æŸ±
 		{
 			printf("1");
-			strcpy_s(StrN3[1], StrI);											//½«2Öùµ×²ãÒÆµ½1Öù¶¥²ã
+			strcpy_s(StrN3[1], StrI);											//å°†2æŸ±åº•å±‚ç§»åˆ°1æŸ±é¡¶å±‚
 			strcpy_s(StrN1[0], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) == 0)																	//Èô²»ÔÚ2ÖùµÄÁ½Æ¬¶¼²»ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) == 0)																	//è‹¥ä¸åœ¨2æŸ±çš„ä¸¤ç‰‡éƒ½ä¸åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN3[1], StrI);											//½«2Öùµ×²ãÒÆµ½3Öùµ×²ã
+			strcpy_s(StrN3[1], StrI);											//å°†2æŸ±åº•å±‚ç§»åˆ°3æŸ±åº•å±‚
 			strcpy_s(StrN3[2], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) == 0)									//Èô²»ÔÚ2ÖùµÄÖ»ÓÐÒ»Æ¬ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) == 0)									//è‹¥ä¸åœ¨2æŸ±çš„åªæœ‰ä¸€ç‰‡åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN3[1], StrI);											//½«2Öùµ×²ãÒÆµ½3ÖùÖÐ²ã
+			strcpy_s(StrN3[1], StrI);											//å°†2æŸ±åº•å±‚ç§»åˆ°3æŸ±ä¸­å±‚
 			strcpy_s(StrN2[2], StrP3);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) != 0)									//Èô²»ÔÚ2ÖùµÄÁ½Æ¬È«ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) != 0)									//è‹¥ä¸åœ¨2æŸ±çš„ä¸¤ç‰‡å…¨åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN3[1], StrI);											//½«2Öùµ×²ãÒÆµ½3Öù¶¥²ã
+			strcpy_s(StrN3[1], StrI);											//å°†2æŸ±åº•å±‚ç§»åˆ°3æŸ±é¡¶å±‚
 			strcpy_s(StrN1[2], StrP3);
 			system("cls");
 			Show();
@@ -1025,63 +1092,63 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
-	if (CH == '2' && strcmp(StrN2[1], StrI) == 0 && strcmp(StrN3[1], StrI) != 0 && strcmp(StrN3[1], StrP5) == 0)		//2ÖùÖÐ²ãÎª¿Õ£¬µ×²ãÎªÎå
+	if (CH == '2' && strcmp(StrN2[1], StrI) == 0 && strcmp(StrN3[1], StrI) != 0 && strcmp(StrN3[1], StrP5) == 0)		//2æŸ±ä¸­å±‚ä¸ºç©ºï¼Œåº•å±‚ä¸ºäº”
 	{
 		printf("2");
 		CH = _getch();
-		if (CH == '1' && strcmp(StrN3[0], StrI) == 0)																	//Èô²»ÔÚ2ÖùµÄÁ½Æ¬¶¼²»ÔÚ1Öù
+		if (CH == '1' && strcmp(StrN3[0], StrI) == 0)																	//è‹¥ä¸åœ¨2æŸ±çš„ä¸¤ç‰‡éƒ½ä¸åœ¨1æŸ±
 		{
 			printf("1");
-			strcpy_s(StrN3[1], StrI);											//½«2Öùµ×²ãÒÆµ½1Öùµ×²ã
+			strcpy_s(StrN3[1], StrI);											//å°†2æŸ±åº•å±‚ç§»åˆ°1æŸ±åº•å±‚
 			strcpy_s(StrN3[0], StrP5);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '1' && strcmp(StrN3[0], StrI) != 0 && strcmp(StrN2[0], StrI) == 0)									//Èô²»ÔÚ2ÖùµÄÖ»ÓÐÒ»Æ¬ÔÚ1Öù
+		if (CH == '1' && strcmp(StrN3[0], StrI) != 0 && strcmp(StrN2[0], StrI) == 0)									//è‹¥ä¸åœ¨2æŸ±çš„åªæœ‰ä¸€ç‰‡åœ¨1æŸ±
 		{
 			printf("1");
-			strcpy_s(StrN3[1], StrI);											//½«2Öùµ×²ãÒÆµ½1ÖùÖÐ²ã
+			strcpy_s(StrN3[1], StrI);											//å°†2æŸ±åº•å±‚ç§»åˆ°1æŸ±ä¸­å±‚
 			strcpy_s(StrN2[0], StrP5);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '1' && strcmp(StrN3[0], StrI) != 0 && strcmp(StrN2[0], StrI) != 0)									//Èô²»ÔÚ2ÖùµÄÁ½Æ¬È«ÔÚ1Öù
+		if (CH == '1' && strcmp(StrN3[0], StrI) != 0 && strcmp(StrN2[0], StrI) != 0)									//è‹¥ä¸åœ¨2æŸ±çš„ä¸¤ç‰‡å…¨åœ¨1æŸ±
 		{
 			printf("1");
-			strcpy_s(StrN3[1], StrI);											//½«2Öùµ×²ãÒÆµ½1Öù¶¥²ã
+			strcpy_s(StrN3[1], StrI);											//å°†2æŸ±åº•å±‚ç§»åˆ°1æŸ±é¡¶å±‚
 			strcpy_s(StrN1[0], StrP5);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) == 0)																	//Èô²»ÔÚ2ÖùµÄÁ½Æ¬¶¼²»ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) == 0)																	//è‹¥ä¸åœ¨2æŸ±çš„ä¸¤ç‰‡éƒ½ä¸åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN3[1], StrI);											//½«2Öùµ×²ãÒÆµ½3Öùµ×²ã
+			strcpy_s(StrN3[1], StrI);											//å°†2æŸ±åº•å±‚ç§»åˆ°3æŸ±åº•å±‚
 			strcpy_s(StrN3[2], StrP5);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) == 0)									//Èô²»ÔÚ2ÖùµÄÖ»ÓÐÒ»Æ¬ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) == 0)									//è‹¥ä¸åœ¨2æŸ±çš„åªæœ‰ä¸€ç‰‡åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN3[1], StrI);											//½«2Öùµ×²ãÒÆµ½3ÖùÖÐ²ã
+			strcpy_s(StrN3[1], StrI);											//å°†2æŸ±åº•å±‚ç§»åˆ°3æŸ±ä¸­å±‚
 			strcpy_s(StrN2[2], StrP5);
 			system("cls");
 			Show();
 			Getin();
 		}
-		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) != 0)									//Èô²»ÔÚ2ÖùµÄÁ½Æ¬È«ÔÚ3Öù
+		if (CH == '3' && strcmp(StrN3[2], StrI) != 0 && strcmp(StrN2[2], StrI) != 0)									//è‹¥ä¸åœ¨2æŸ±çš„ä¸¤ç‰‡å…¨åœ¨3æŸ±
 		{
 			printf("3");
-			strcpy_s(StrN3[1], StrI);											//½«2Öùµ×²ãÒÆµ½3Öù¶¥²ã
+			strcpy_s(StrN3[1], StrI);											//å°†2æŸ±åº•å±‚ç§»åˆ°3æŸ±é¡¶å±‚
 			strcpy_s(StrN1[2], StrP5);
 			system("cls");
 			Show();
@@ -1091,7 +1158,7 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
@@ -1157,7 +1224,7 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
@@ -1224,7 +1291,7 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
@@ -1290,7 +1357,7 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
@@ -1356,14 +1423,14 @@ void Getin()
 		{
 			system("cls");
 			Show();
-			printf("\n\t\t\t   ÊäÈë´íÎó£¬ÇëÖØÐÂ²Ù×÷\n\n");
+			printf("\n\t\t\t   è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°æ“ä½œ\n\n");
 			Getin();
 		}
 	}
 	//-----------------------------------------------------------------------------------------------------------
 	if (CH == 'q')
 	{
-		printf("\n\n\n\t\t\t   ÍË³öÓÎÏ·....\n\n");
+		printf("\n\n\n\t\t\t   é€€å‡ºæ¸¸æˆ....\n\n");
 		exit(0);
 	}
 	//-----------------------------------------------------------------------------------------------------------
@@ -1381,8 +1448,8 @@ void Getin()
 	//-----------------------------------------------------------------------------------------------------------
 	if (strcmp(StrN1[2], StrP3) == 0 && strcmp(StrN2[2], StrP5) == 0 && strcmp(StrN3[2], StrP7) == 0)
 	{
-		printf("\n\n\t\t\tÓÎÏ·³É¹¦!\n\n");
-		printf("\t1.  ÖØÐÂ¿ªÊ¼\t2.  ·µ»ØÖ÷²Ëµ¥\t3.  ÍË³öÓÎÏ·\n\n");
+		printf("\n\n\t\t\tæ¸¸æˆæˆåŠŸ!\n\n");
+		printf("\t1.  é‡æ–°å¼€å§‹\t2.  è¿”å›žä¸»èœå•\t3.  é€€å‡ºæ¸¸æˆ\n\n");
 		CH = _getch();
 		if (CH == '1')
 		{
@@ -1404,77 +1471,7 @@ void Getin()
 	{
 		system("cls");
 		Show();
-		printf("\n\t\t\t ÊäÈë´íÎó£¬ÇëÖØÐÂÑ¡Ôñ!\n");
+		printf("\n\t\t\t è¾“å…¥é”™è¯¯ï¼Œè¯·é‡æ–°é€‰æ‹©!\n");
 		Getin();
-	}
-}
-
-
-void Menu();
-void Play()
-{
-	int n = 3;
-	int i = 0;
-	//printf("ÇëÊäÈë²ãÊý:");
-	//scanf_s("%d", &n);
-	
-		strcpy_s(StrN1[0], StrP3);			//³õÊ¼»¯
-		strcpy_s(StrN1[1], StrI);
-		strcpy_s(StrN1[2], StrI);
-		strcpy_s(StrN2[0], StrP5);
-		strcpy_s(StrN2[1], StrI);
-		strcpy_s(StrN2[2], StrI);
-		strcpy_s(StrN3[0], StrP7);
-		strcpy_s(StrN3[1], StrI);
-		strcpy_s(StrN3[2], StrI);
-		Show();
-
-		while (1)
-		{
-			Getin();
-		}
-}
-
-
-void Menu();
-void Help()
-{
-	printf("\n\n\n\n\t\t\t\t±§Ç¸£¬°ïÖúÇë×ÔÐÐÄÔ²¹¡£(°´ÏÂB·µ»ØÖ÷²Ëµ¥)");
-	if (_getch())
-	{
-		system("cls");
-		Menu();
-	}
-}
-
-
-void Menu()
-{
-	int M_CH = 0;
-	printf("\n\n\n\n\t\t\t     Sakura ººÅµËþV1.01");
-	printf("\n\n\n\n\n\t\t\t\t1. ¿ªÊ¼ÓÎÏ·\n\n\n\t\t\t\t2. °ïÖú\n\n\n\t\t\t\t3. ÍË³öÓÎÏ·\n\n");
-	M_CH = _getch();
-	if (M_CH == '1')
-	{
-		system("cls");
-		Play();
-	}
-	if (M_CH == '2')
-	{
-		system("cls");
-		Help();
-	}
-	if (M_CH == '3')
-	{
-		exit(0);
-	}
-	else
-	{
-		printf("\n\n\t\t\t    ÊäÈë´íÎó£¬ÇëÖØÐÂÊäÈë!\n");
-		int DELAY = 280000000;
-		int i = 0;
-		for (i = 0; i < DELAY; i++){}
-		system("cls");
-		Menu();
 	}
 }
